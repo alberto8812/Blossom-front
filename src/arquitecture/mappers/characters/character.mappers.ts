@@ -10,3 +10,14 @@ export const characterMappers = (Character: CharacterDB): CharacterEntity => {
     }
 
 }
+export const characterDetailMappers = (Character: CharacterDB): CharacterEntity => {
+    return {
+        name: Character.name,
+        specie: Character.specie.name,
+        img: Character.img,
+        status: Character.status,
+        origin: Character.origin.name,
+        id: Character.id
+    }
+
+}

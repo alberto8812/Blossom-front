@@ -3,6 +3,10 @@ export interface CharacterEntity {
     specie: Name;
     img: string;
     id: string;
+    origin?: string
+    status?: string
+
+
 }
 
 export enum Name {

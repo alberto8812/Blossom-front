@@ -19,7 +19,6 @@ export const getAllCharacters = async (): Promise<CharacterEntity[]> => {
     }
   );
   const { get_all_character } = data;
-  console.log(data, "data");
   const transformedData = get_all_character.data.map(characterMappers)
   return transformedData;
 };

@@ -22,10 +22,11 @@ export const CharacterPages = () => {
       <div className="flex items-center gap-2 mb-6">
         <div className="relative">
           <img
-            src="/placeholder.svg?height=80&width=80"
+            src={`${characters?.img ? characters.img : "./img/profile.jpg"}`}
             alt="Character avatar"
             className="w-20 h-20 rounded-full object-cover"
           />
+
           <div className="absolute -right-1 -bottom-1">
             <svg
               viewBox="0 0 24 24"
@@ -35,25 +36,23 @@ export const CharacterPages = () => {
             </svg>
           </div>
         </div>
-        <h1 className="text-2xl font-bold text-gray-900">
-          Abadango Cluster Princess
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-900">{characters?.name}</h1>
       </div>
 
       <div className="space-y-6">
         <div>
           <h2 className="text-lg font-semibold text-gray-900">Specie</h2>
-          <p className="text-gray-600">Alien</p>
+          <p className="text-gray-600">{characters?.specie}</p>
         </div>
 
         <div>
           <h2 className="text-lg font-semibold text-gray-900">Status</h2>
-          <p className="text-gray-600">Alive</p>
+          <p className="text-gray-600">{characters?.status}</p>
         </div>
 
         <div>
           <h2 className="text-lg font-semibold text-gray-900">Occupation</h2>
-          <p className="text-gray-600">Princess</p>
+          <p className="text-gray-600">{characters?.origin}</p>
         </div>
       </div>
     </div>

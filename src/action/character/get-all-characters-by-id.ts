@@ -1,16 +1,15 @@
-import { characterMappers, GET_ALL_CHARACTER, ResponseCharacter } from "../../arquitecture";
+import { characterDetailMappers, GET_ALL_CHARACTER_BY_ID, ResponseCharacterId } from "../../arquitecture";
 import { graphqlClient } from "../../arquitecture/graphql/client";
 import { CharacterEntity } from "../../domain";
 
 
-export const getAllCharactersById = async (id: string): Promise<CharacterEntity[]> => {
+export const getAllCharactersById = async (id: string): Promise<CharacterEntity> => {
 
-  const { data } = await graphqlClient.query<ResponseCharacter>(
+  const { data } = await graphqlClient.query<ResponseCharacterId>(
     {
-      query: GET_ALL_CHARACTER,
+      query: GET_ALL_CHARACTER_BY_ID,
       fetchPolicy: "network-only",
-      //fetchPolicy: "no-cache", // No se lee ni se escribe en el caché
-      //variables: { paginationAndFilterInput: inputMethod },
+      variables: { getOneCharacterId: id },
       context: {
         headers: {
           authorization: `Bearer `,
@@ -18,8 +17,7 @@ export const getAllCharactersById = async (id: string): Promise<CharacterEntity[
       },
     }
   );
-  const { get_all_character } = data;
-  console.log(data, "data");
-  const transformedData = get_all_character.data.map(characterMappers)
+  const { get_one_character } = data;
+  const transformedData = characterDetailMappers(get_one_character.data)
   return transformedData;
 };
