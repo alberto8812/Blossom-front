@@ -6,6 +6,8 @@ import "./SideMenu.css";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { SearchSideMenu } from "./SearchSideMenu";
 import { ProfileCard } from "../cards/ProfileCard";
+import { useQuery } from "@tanstack/react-query";
+import { getAllCharacters } from "../../../action";
 
 interface MenuItem {
   title: string;
@@ -25,6 +27,16 @@ const menuItems: MenuItem[] = [
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const {
+    data: characters,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["characters", "sidebar"],
+    queryFn: () => getAllCharacters(),
+    staleTime: 1000 * 60 * 5, //5 minutos
+  });
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
