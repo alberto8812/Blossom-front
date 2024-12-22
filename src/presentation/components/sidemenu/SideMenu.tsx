@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { IconType } from "react-icons";
 import { NavLink } from "react-router-dom";
 
 import "./SideMenu.css";
@@ -10,22 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../../../action";
 import { Accordion } from "../proto/acordion/Accordion";
 import { Squeleton } from "..";
+import { CharacterEntity } from "../../../domain";
 
-interface MenuItem {
-  title: string;
-  subTitle: string;
-  href: string;
-  Icon: IconType;
-}
-
-const menuItems: MenuItem[] = [
-  //   { title: 'Dashboard', subTitle: 'Visualizar data', href: '/dashboard', Icon: IoSpeedometerOutline },
-  //   { title: 'Osos', subTitle: 'Manejador de osos', href: '/dashboard/bears', Icon: IoPawOutline },
-  //   { title: 'Persona', subTitle: 'Nombre y apellido', href: '/dashboard/person', Icon: IoAccessibilityOutline },
-  //   { title: 'Tareas', subTitle: 'Listado de tareas', href: '/dashboard/tasks', Icon: IoListOutline },
-  //   { title: 'Boda', subTitle: 'Invitados a la boda', href: '/dashboard/wedding-invitation', Icon: IoHeartOutline },
-];
-//bg-gray-900 min-h-screen z-10 text-slate-300 w-80 left-0 overflow-y-scroll
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,14 +47,14 @@ export const SideMenu = () => {
             <div className="space-y-7 pt-5 flex flex-col">
               {/* //!todo implmentar faboritos */}
               <Accordion title={`STARRED CHARCTERS (${4})`}>
-                {characters?.map((item: any, index: number) => (
+                {characters?.map((item: CharacterEntity) => (
                   <NavLink
                     to={`/dashboard/characters/${item.id}`}
                     key={item.id}
                   >
                     <ProfileCard
                       name={item.name}
-                      species={item.species}
+                      species={item.specie}
                       img={item.img}
                     />
                   </NavLink>
@@ -85,13 +70,17 @@ export const SideMenu = () => {
                 style="max-h-96"
                 initalState={true}
               >
-                {characters?.map((item: any, index: number) => (
-                  <ProfileCard
+                {characters?.map((item: CharacterEntity) => (
+                  <NavLink
+                    to={`/dashboard/characters/${item.id}`}
                     key={item.id}
-                    name={item.name}
-                    species={item.species}
-                    img={item.img}
-                  />
+                  >
+                    <ProfileCard
+                      name={item.name}
+                      species={item.specie}
+                      img={item.img}
+                    />
+                  </NavLink>
                 ))}
               </Accordion>
             </div>

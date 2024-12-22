@@ -20,13 +20,10 @@ export const Accordion = ({
   const toggleExpanded = () => setExpanded((current) => !current);
 
   return (
-    <div
-      className="my-2 sm:my-4 md:my-6 shadow-sm cursor-pointer bg-white"
-      onClick={toggleExpanded}
-    >
+    <div className="my-2 sm:my-4 md:my-6 shadow-sm cursor-pointer bg-white">
       <div className="px-6 text-left items-center h-20 select-none flex justify-between flex-row">
         <h5 className="flex-1">{title}</h5>
-        <div className="flex-none pl-2">
+        <div className="flex-none pl-2" onClick={toggleExpanded}>
           {expanded ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </div>
       </div>
