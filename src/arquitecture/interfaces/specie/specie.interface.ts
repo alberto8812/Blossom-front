@@ -1,8 +1,15 @@
+import { ResponseGeneric } from "../common/response.interface";
+
+export interface GenderResponse {
+    get_all_gender: ResponseGeneric<SpecieDB>;
+}
+
+
 export interface SpecieDB {
     id: string;
-    name: Name;
+    name: NameGender;
 }
-export enum Name {
+enum NameGender {
     Alien = "Alien",
     Human = "Human",
 }

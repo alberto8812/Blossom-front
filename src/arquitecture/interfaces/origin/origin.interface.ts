@@ -9,3 +9,7 @@ export interface OriginDB {
     name: string;
 }
 
+export enum Name {
+    Alien = "Alien",
+    Human = "Human",
+}
