@@ -1,7 +1,12 @@
 import { CiSearch } from "react-icons/ci";
 import { CiSliderVertical } from "react-icons/ci";
 
-export const SearchSideMenu = () => {
+interface Props {
+  handleFilterModal: (isOpenFilter: boolean) => void;
+  isOpenFilter: boolean;
+}
+
+export const SearchSideMenu = ({ handleFilterModal, isOpenFilter }: Props) => {
   return (
     <div className="max-w-md mx-auto">
       <div className="relative">
@@ -17,6 +22,7 @@ export const SearchSideMenu = () => {
         <button
           type="submit"
           className="text-white absolute end-2.5 bottom-2.5 bg-transparent  hover:bg-primary-Primary_100 rounded-lg text-sm px-1 py-2 shadow-none border-none "
+          onClick={() => handleFilterModal(!isOpenFilter)}
         >
           <CiSliderVertical className="w-5 h-5 " color="#5A3696" />
         </button>

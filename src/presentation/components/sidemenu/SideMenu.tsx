@@ -8,11 +8,12 @@ import { ProfileCard } from "../cards/ProfileCard";
 import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../../../action";
 import { Accordion } from "../proto/acordion/Accordion";
-import { Squeleton } from "..";
+import { ModalFilterSidebar, Squeleton } from "..";
 import { CharacterEntity } from "../../../domain";
 
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenFilter, setIsOpenFilter] = useState(false);
 
   const { data: characters, isLoading } = useQuery({
     queryKey: ["characters", "sidebar"],
@@ -22,8 +23,12 @@ export const SideMenu = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleFilterModal = (isOpenFilter: boolean) => {
+    setIsOpenFilter(isOpenFilter);
+  };
   return (
-    <div className="flex">
+    <div className="flex ">
       <button
         onClick={toggleSidebar}
         className={`${
@@ -35,13 +40,19 @@ export const SideMenu = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } lg:block bg-white lg:w-96  w-screen  h-screen xs:fixed rounded-none border-none`}
+        } lg:block bg-gray-100 lg:w-96  w-screen  h-screen xs:fixed rounded-none border-none`}
       >
-        <div className="p-4 space-y-4 pt-16">
+        <div className="p-4 space-y-4 pt-16 relative">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold">Rick and Morty list</h1>
           </div>
-          <SearchSideMenu />
+          <SearchSideMenu
+            handleFilterModal={handleFilterModal}
+            isOpenFilter={isOpenFilter}
+          />
+          {isOpenFilter && (
+            <ModalFilterSidebar handleFilterModal={handleFilterModal} />
+          )}
           {isLoading ? (
             <Squeleton />
           ) : (
