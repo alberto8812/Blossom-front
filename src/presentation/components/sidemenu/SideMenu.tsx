@@ -17,8 +17,8 @@ export const SideMenu = () => {
   const [filterData, setFilterData] = useState<CharacterFilter>({});
 
   const { data: characters, isLoading } = useQuery({
-    queryKey: ["characters", "sidebar"],
-    queryFn: () => getAllCharacters(),
+    queryKey: ["characters", "sidebar", filterData],
+    queryFn: () => getAllCharacters(filterData),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 
@@ -39,7 +39,6 @@ export const SideMenu = () => {
       DeleteField.forEach((field) => {
         delete newFilterData[field];
       });
-
       setFilterData(newFilterData);
       return;
     }

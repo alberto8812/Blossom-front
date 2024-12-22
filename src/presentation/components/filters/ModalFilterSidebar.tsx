@@ -30,15 +30,33 @@ export const ModalFilterSidebar = ({ handleFilterSearch }: Props) => {
       characterFilter.originId === "all" &&
       specieFilter.speciesId === "all"
     ) {
-      handleFilterSearch({}, ["speciesId", "originId"]);
+      handleFilterSearch(
+        {
+          ...characterFilter,
+          ...specieFilter,
+        },
+        ["speciesId", "originId"]
+      );
       return;
     }
     if (characterFilter.originId === "all") {
-      handleFilterSearch({}, ["originId"]);
+      handleFilterSearch(
+        {
+          ...characterFilter,
+          ...specieFilter,
+        },
+        ["originId"]
+      );
       return;
     }
     if (specieFilter.speciesId === "all") {
-      handleFilterSearch({}, ["speciesId"]);
+      handleFilterSearch(
+        {
+          ...characterFilter,
+          ...specieFilter,
+        },
+        ["speciesId"]
+      );
       return;
     }
 
