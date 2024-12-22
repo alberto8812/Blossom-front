@@ -27,14 +27,16 @@ export const SideMenu = () => {
     <div className="flex">
       <button
         onClick={toggleSidebar}
-        className="p-4 text-primary-Primary_700 text-lg lg:hidden shadow-none border-none hover:bg-gray-100 pt-12"
+        className={`${
+          isOpen ? "hidden" : "block"
+        } p-4 text-primary-Primary_700 text-lg lg:hidden shadow-none border-none hover:bg-gray-100 pt-12`}
       >
         <FaArrowLeftLong className="fas fa-bars" size={30} />
       </button>
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } lg:block bg-white lg:w-96  w-screen  h-screen fixed rounded-none border-none`}
+        } lg:block bg-white lg:w-96  w-screen  h-screen xs:fixed rounded-none border-none`}
       >
         <div className="p-4 space-y-4 pt-16">
           <div className="flex justify-between items-center">
