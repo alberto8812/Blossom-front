@@ -53,9 +53,9 @@ export const SideMenu = () => {
 
           <div className="space-y-7 pt-5 flex flex-col">
             <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
-            <div className="h-52 overflow-y-auto">
-              <ProfileCard />
-              <ProfileCard />
+            <div className="h-40 overflow-y-auto">
+              <ProfileCard name="carlos velasco saavedra" species="Human" />
+              <ProfileCard name="carlos velasco saavedra" species="Human" />
             </div>
 
             {/* {menuItems.map((item, index) => (
@@ -64,8 +64,8 @@ export const SideMenu = () => {
 
             <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
             <div className="h-screen  overflow-y-auto">
-              <ProfileCard />
-              <ProfileCard />
+              <ProfileCard name="carlos velasco saavedra" species="Human" />
+              <ProfileCard name="carlos velasco saavedra" species="Human" />
             </div>
           </div>
         </div>
