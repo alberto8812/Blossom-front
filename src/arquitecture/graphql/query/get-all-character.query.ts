@@ -1,17 +1,20 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_CHARACTER = gql`
-query Get_all_character($name: String, $status: String, $originId: String, $speciesId: String) {
-  get_all_character(name: $name, status: $status, originId: $originId, speciesId: $speciesId) {
-    code
+query ExampleQuery {
+  get_all_origin {
     message
+  }
+  get_all_gender {
+    message
+  }
+  get_all_character {
     data {
-      names
-      status
-      origin {
+      specie {
         name
-        id
       }
+      name
+      img
     }
   }
 }
