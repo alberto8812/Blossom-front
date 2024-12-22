@@ -4,9 +4,6 @@ import { CiSliderVertical } from "react-icons/ci";
 export const SearchSideMenu = () => {
   return (
     <div className="max-w-md mx-auto">
-      <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
-        Search
-      </label>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <CiSearch className="w-5 h-5 text-gray-400 dark:text-gray-300" />

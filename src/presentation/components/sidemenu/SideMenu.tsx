@@ -1,10 +1,11 @@
-import type { IconType } from "react-icons";
-import { IoLogOutOutline } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
-import "./SideMenu.css";
-import { SideMenuItem } from "./SideMenuItem";
 import { useState } from "react";
-import { SearchSideMenu } from "./searchSideMenu";
+import type { IconType } from "react-icons";
+import { NavLink } from "react-router-dom";
+
+import "./SideMenu.css";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { SearchSideMenu } from "./SearchSideMenu";
+import { ProfileCard } from "../cards/ProfileCard";
 
 interface MenuItem {
   title: string;
@@ -32,9 +33,9 @@ export const SideMenu = () => {
       {/* Botón para mostrar/ocultar la barra lateral */}
       <button
         onClick={toggleSidebar}
-        className="p-4 text-cyan-500 text-lg lg:hidden"
+        className="p-4 text-primary-Primary_700 text-lg lg:hidden shadow-none border-none hover:bg-gray-100 pt-12"
       >
-        <i className="fas fa-bars"></i>
+        <FaArrowLeftLong className="fas fa-bars" size={30} />
       </button>
 
       {/* Barra lateral */}
@@ -43,8 +44,26 @@ export const SideMenu = () => {
           isOpen ? "block" : "hidden"
         } lg:block bg-white lg:w-96  w-screen  h-screen fixed rounded-none border-none`}
       >
-        <div className="p-4 space-y-4">
+        <div className="p-4 space-y-4 pt-16">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold">Rick and Morty list</h1>
+          </div>
           <SearchSideMenu />
+          {/* !TODO:IMPLMENTAR LA CANTIDAD FILTROS */}
+
+          <div className="space-y-7 pt-5 flex flex-col">
+            <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
+            <div className="h-48 overflow-y-auto">
+              <ProfileCard />
+            </div>
+
+            {/* {menuItems.map((item, index) => (
+              <SideMenuItem key={index} {...item} />
+            ))} */}
+
+            <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
+            <div className="h-screen bg-blue-500 overflow-y-auto"></div>
+          </div>
         </div>
       </div>
     </div>
