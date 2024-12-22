@@ -21,6 +21,7 @@ export const SideMenu = () => {
     queryFn: () => getAllCharacters(),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };

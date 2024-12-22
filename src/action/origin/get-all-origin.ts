@@ -9,8 +9,6 @@ export const getAllOrigin = async (): Promise<OriginEntity[]> => {
     {
       query: GET_ALL_ORIGIN,
       fetchPolicy: "network-only",
-      //fetchPolicy: "no-cache", // No se lee ni se escribe en el caché
-      //variables: { paginationAndFilterInput: inputMethod },
       context: {
         headers: {
           authorization: `Bearer `,
