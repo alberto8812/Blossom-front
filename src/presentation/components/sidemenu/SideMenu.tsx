@@ -8,6 +8,8 @@ import { SearchSideMenu } from "./SearchSideMenu";
 import { ProfileCard } from "../cards/ProfileCard";
 import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../../../action";
+import { Accordion } from "../proto/acordion/Accordion";
+import { Squeleton } from "..";
 
 interface MenuItem {
   title: string;
@@ -62,25 +64,43 @@ export const SideMenu = () => {
             <h1 className="text-2xl font-bold">Rick and Morty list</h1>
           </div>
           <SearchSideMenu />
+          {isLoading ? (
+            <Squeleton />
+          ) : (
+            <div className="space-y-7 pt-5 flex flex-col">
+              {/* //!todo implmentar faboritos */}
+              <Accordion title={`STARRED CHARCTERS (${4})`}>
+                {characters?.map((item: any, index: number) => (
+                  <ProfileCard
+                    key={item.id}
+                    name={item.name}
+                    species={item.species}
+                    img={item.img}
+                  />
+                ))}
+              </Accordion>
+
+              {/* {menuItems.map((item, index) => (
+                <SideMenuItem key={index} {...item} />
+              ))} */}
+
+              <Accordion
+                title={`CHARCTERS (${4})`}
+                style="max-h-96"
+                initalState={true}
+              >
+                {characters?.map((item: any, index: number) => (
+                  <ProfileCard
+                    key={item.id}
+                    name={item.name}
+                    species={item.species}
+                    img={item.img}
+                  />
+                ))}
+              </Accordion>
+            </div>
+          )}
           {/* !TODO:IMPLMENTAR LA CANTIDAD FILTROS */}
-
-          <div className="space-y-7 pt-5 flex flex-col">
-            <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
-            <div className="h-40 overflow-y-auto">
-              <ProfileCard name="carlos velasco saavedra" species="Human" />
-              <ProfileCard name="carlos velasco saavedra" species="Human" />
-            </div>
-
-            {/* {menuItems.map((item, index) => (
-              <SideMenuItem key={index} {...item} />
-            ))} */}
-
-            <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
-            <div className="h-screen  overflow-y-auto">
-              <ProfileCard name="carlos velasco saavedra" species="Human" />
-              <ProfileCard name="carlos velasco saavedra" species="Human" />
-            </div>
-          </div>
         </div>
       </div>
     </div>

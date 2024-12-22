@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const ProfileCard = ({ name = "", species = "", img }: Props) => {
+  console.log(name, species, img);
   return (
     <div className="rounded-lg border-none bg-card text-card-foreground shadow-none mb-1 h-min flex items-center aligh-center max-w-full py-2 px-4">
       <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full min-h-[32px] min-w-[32px]">
