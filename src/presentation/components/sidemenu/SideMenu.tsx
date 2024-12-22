@@ -53,7 +53,8 @@ export const SideMenu = () => {
 
           <div className="space-y-7 pt-5 flex flex-col">
             <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
-            <div className="h-48 overflow-y-auto">
+            <div className="h-52 overflow-y-auto">
+              <ProfileCard />
               <ProfileCard />
             </div>
 
@@ -62,7 +63,10 @@ export const SideMenu = () => {
             ))} */}
 
             <span className="text-xs  ">{`STARRED CHARCTERS (${4})`}</span>
-            <div className="h-screen bg-blue-500 overflow-y-auto"></div>
+            <div className="h-screen  overflow-y-auto">
+              <ProfileCard />
+              <ProfileCard />
+            </div>
           </div>
         </div>
       </div>
