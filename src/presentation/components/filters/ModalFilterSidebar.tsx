@@ -113,7 +113,18 @@ export const ModalFilterSidebar = ({ handleFilterSearch }: Props) => {
 
         <button
           onClick={() => sendFilter()}
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors text-xs"
+          className={`
+            ${
+              Object.keys(characterFilter).length === 0 &&
+              Object.keys(specieFilter).length === 0
+                ? "cursor-not-allowed bg-gray-400"
+                : "bg-primary-Primary_700 hover:bg-purple-700"
+            }
+            w-full  text-white py-3 rounded-lg transition-colors text-xs`}
+          disabled={
+            Object.keys(characterFilter).length === 0 &&
+            Object.keys(specieFilter).length === 0
+          }
         >
           Filter
         </button>
