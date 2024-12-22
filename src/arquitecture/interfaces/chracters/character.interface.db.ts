@@ -4,7 +4,7 @@ import { ResponseDetailGeneric, ResponseGeneric } from "../common/response.inter
 import { SpecieDB } from "../specie/specie.interface";
 
 export interface ResponseCharacter {
-    get_all_character: ResponseGeneric<CharacterDB[]>;
+    get_all_character: ResponseGeneric<CharacterDB>;
 }
 export interface ResponseCharacterId {
     get_one_character: ResponseDetailGeneric<CharacterDB>;
