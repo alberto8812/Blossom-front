@@ -5,7 +5,8 @@ export const characterMappers = (Character: CharacterDB): CharacterEntity => {
     return {
         name: Character.name,
         specie: Character.specie.name,
-        img: Character.img
+        img: Character.img,
+        id: Character.id
     }
 
 }

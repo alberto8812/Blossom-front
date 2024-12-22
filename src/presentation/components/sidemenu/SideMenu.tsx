@@ -29,31 +29,23 @@ const menuItems: MenuItem[] = [
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {
-    data: characters,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
+  const { data: characters, isLoading } = useQuery({
     queryKey: ["characters", "sidebar"],
     queryFn: () => getAllCharacters(),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
-  console.log(characters);
+  console.log(characters ? characters[0] : []);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
   return (
     <div className="flex">
-      {/* Botón para mostrar/ocultar la barra lateral */}
       <button
         onClick={toggleSidebar}
         className="p-4 text-primary-Primary_700 text-lg lg:hidden shadow-none border-none hover:bg-gray-100 pt-12"
       >
         <FaArrowLeftLong className="fas fa-bars" size={30} />
       </button>
-
-      {/* Barra lateral */}
       <div
         className={`${
           isOpen ? "block" : "hidden"
@@ -71,12 +63,16 @@ export const SideMenu = () => {
               {/* //!todo implmentar faboritos */}
               <Accordion title={`STARRED CHARCTERS (${4})`}>
                 {characters?.map((item: any, index: number) => (
-                  <ProfileCard
+                  <NavLink
+                    to={`/dashboard/characters/${item.id}`}
                     key={item.id}
-                    name={item.name}
-                    species={item.species}
-                    img={item.img}
-                  />
+                  >
+                    <ProfileCard
+                      name={item.name}
+                      species={item.species}
+                      img={item.img}
+                    />
+                  </NavLink>
                 ))}
               </Accordion>
 
