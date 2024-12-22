@@ -1,6 +1,6 @@
 export const CharacterDetailSkeleton = () => {
   return (
-    <div className="max-w-md p-6 animate-pulse">
+    <div className="max-w-md p-6 animate-pulse w-screen h-screen">
       <div className="flex items-center gap-2 mb-6">
         <div className="relative">
           {/* Avatar skeleton */}
