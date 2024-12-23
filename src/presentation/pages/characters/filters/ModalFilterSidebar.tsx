@@ -1,5 +1,5 @@
-import { useFilterSharestore } from "../../stores";
-import { GenderEntity, OriginEntity } from "../../../domain";
+import { GenderEntity, OriginEntity } from "../../../../domain";
+import { useFilterSharestore } from "../../../stores";
 
 interface Props {
   origins: OriginEntity[];

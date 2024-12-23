@@ -4,13 +4,21 @@ import { NavLink } from "react-router-dom";
 import "./SideMenu.css";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { SearchSideMenu } from "./SearchSideMenu";
-import { ProfileCard } from "../cards/ProfileCard";
+import { ProfileCard } from "../../../../components/cards/ProfileCard";
 import { useQuery } from "@tanstack/react-query";
-import { getAllCharacters, getAllGender, getAllOrigin } from "../../../action";
-import { Accordion } from "../proto/acordion/Accordion";
-import { ModalFilterSidebar, Squeleton } from "..";
-import { CharacterEntity } from "../../../domain";
-import { useFavoritesCharacterStore, useFilterSharestore } from "../../stores";
+import {
+  getAllCharacters,
+  getAllGender,
+  getAllOrigin,
+} from "../../../../../action";
+import { Accordion } from "../../../../components/proto/acordion/Accordion";
+import { CharacterEntity } from "../../../../../domain";
+import {
+  useFavoritesCharacterStore,
+  useFilterSharestore,
+} from "../../../../stores";
+import { Squeleton } from "../../../../components";
+import { ModalFilterSidebar } from "../../filters/ModalFilterSidebar";
 
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
