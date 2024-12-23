@@ -10,12 +10,15 @@ import { getAllCharacters, getAllGender, getAllOrigin } from "../../../action";
 import { Accordion } from "../proto/acordion/Accordion";
 import { ModalFilterSidebar, Squeleton } from "..";
 import { CharacterEntity } from "../../../domain";
-import { useFilterSharestore } from "../../stores";
+import { useFavoritesCharacterStore, useFilterSharestore } from "../../stores";
 
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const characterFilter = useFilterSharestore((state) => state.characterFilter);
+  const favoritesCharacter = useFavoritesCharacterStore(
+    (state) => state.favorites
+  );
 
   const { data: characters, isLoading } = useQuery({
     queryKey: ["characters", "sidebar", characterFilter],
@@ -74,12 +77,13 @@ export const SideMenu = () => {
             <div className="space-y-7 pt-5 flex flex-col">
               {/* //!todo implmentar faboritos */}
               <Accordion title={`STARRED CHARCTERS (${4})`}>
-                {characters?.map((item: CharacterEntity) => (
+                {favoritesCharacter?.map((item: CharacterEntity) => (
                   <NavLink
                     to={`/dashboard/characters/${item.id}`}
                     key={item.id}
                   >
                     <ProfileCard
+                      id={item.id}
                       name={item.name}
                       species={item.specie}
                       img={item.img}
@@ -87,28 +91,29 @@ export const SideMenu = () => {
                   </NavLink>
                 ))}
               </Accordion>
-
-              {/* {menuItems.map((item, index) => (
-                <SideMenuItem key={index} {...item} />
-              ))} */}
-
               <Accordion
                 title={`CHARCTERS (${4})`}
                 style="max-h-96"
                 initalState={true}
               >
-                {characters?.map((item: CharacterEntity) => (
-                  <NavLink
-                    to={`/dashboard/characters/${item.id}`}
-                    key={item.id}
-                  >
-                    <ProfileCard
-                      name={item.name}
-                      species={item.specie}
-                      img={item.img}
-                    />
-                  </NavLink>
-                ))}
+                {characters?.map((item: CharacterEntity) => {
+                  if (favoritesCharacter?.find((fav) => fav.id === item.id)) {
+                    return null;
+                  }
+                  return (
+                    <NavLink
+                      to={`/dashboard/characters/${item.id}`}
+                      key={item.id}
+                    >
+                      <ProfileCard
+                        id={item.id}
+                        name={item.name}
+                        species={item.specie}
+                        img={item.img}
+                      />
+                    </NavLink>
+                  );
+                })}
               </Accordion>
             </div>
           )}

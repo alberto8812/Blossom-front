@@ -1,6 +1,6 @@
 export interface CharacterEntity {
     name: string;
-    specie: Name;
+    specie: NameGender;
     img: string;
     id: string;
     origin?: string
@@ -9,7 +9,7 @@ export interface CharacterEntity {
 
 }
 
-export enum Name {
+enum NameGender {
     Alien = "Alien",
     Human = "Human",
 }
