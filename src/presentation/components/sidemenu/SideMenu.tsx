@@ -6,7 +6,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { SearchSideMenu } from "./SearchSideMenu";
 import { ProfileCard } from "../cards/ProfileCard";
 import { useQuery } from "@tanstack/react-query";
-import { getAllCharacters } from "../../../action";
+import { getAllCharacters, getAllGender, getAllOrigin } from "../../../action";
 import { Accordion } from "../proto/acordion/Accordion";
 import { ModalFilterSidebar, Squeleton } from "..";
 import { CharacterEntity } from "../../../domain";
@@ -20,6 +20,17 @@ export const SideMenu = () => {
   const { data: characters, isLoading } = useQuery({
     queryKey: ["characters", "sidebar", characterFilter],
     queryFn: () => getAllCharacters(characterFilter),
+    staleTime: 1000 * 60 * 5, //5 minutos
+  });
+
+  const { data: origins, isLoading: isLoadingOrigin } = useQuery({
+    queryKey: ["origin", "sidebar"],
+    queryFn: () => getAllOrigin(),
+    staleTime: 1000 * 60 * 5, //5 minutos
+  });
+  const { data: gender, isLoading: isLoadingGneder } = useQuery({
+    queryKey: ["gender", "sidebar"],
+    queryFn: () => getAllGender(),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 
@@ -54,7 +65,9 @@ export const SideMenu = () => {
             handleFilterModal={handleFilterModal}
             isOpenFilter={isOpenFilter}
           />
-          {isOpenFilter && <ModalFilterSidebar />}
+          {isOpenFilter && (
+            <ModalFilterSidebar origins={origins ?? []} gender={gender ?? []} />
+          )}
           {isLoading ? (
             <Squeleton />
           ) : (

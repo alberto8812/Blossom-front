@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { CharacterFilter, NameFilter } from "../../../domain";
-import { getAllGender, getAllOrigin } from "../../../action";
-import { useQuery } from "@tanstack/react-query";
-import { useStore } from "zustand";
 import { useFilterSharestore } from "../../stores";
+import { GenderEntity, OriginEntity } from "../../../domain";
 
-interface Props {}
+interface Props {
+  origins: OriginEntity[];
+  gender: GenderEntity[];
+}
 
-export const ModalFilterSidebar = ({}: Props) => {
+export const ModalFilterSidebar = ({ origins, gender }: Props) => {
   const specieFilter = useFilterSharestore((state) => state.specieFilter);
   const characterFilter = useFilterSharestore((state) => state.originFilter);
   const setValidatedFieldFilter = useFilterSharestore(
@@ -19,17 +18,6 @@ export const ModalFilterSidebar = ({}: Props) => {
   const setSpecieFilter = useFilterSharestore(
     (state) => state.setSpeciesCharacterFilter
   );
-
-  const { data: origins, isLoading } = useQuery({
-    queryKey: ["origin", "sidebar"],
-    queryFn: () => getAllOrigin(),
-    staleTime: 1000 * 60 * 5, //5 minutos
-  });
-  const { data: gender, isLoading: isLoadingGneder } = useQuery({
-    queryKey: ["gender", "sidebar"],
-    queryFn: () => getAllGender(),
-    staleTime: 1000 * 60 * 5, //5 minutos
-  });
 
   const sendFilter = () => {
     setValidatedFieldFilter();
