@@ -10,7 +10,7 @@ interface Props {
 
 export const SearchSideMenu = ({ handleFilterModal, isOpenFilter }: Props) => {
   const [Namefilter, setNameFilter] = useState("");
-  const characterFilter = useFilterSharestore(
+  const nameFilter = useFilterSharestore(
     (state) => state.setNameCharacterFilter
   );
 
@@ -19,12 +19,12 @@ export const SearchSideMenu = ({ handleFilterModal, isOpenFilter }: Props) => {
     setNameFilter(name);
 
     if (name.trim() === "") {
-      characterFilter({});
+      nameFilter({});
       return;
     }
 
     if (name.trim() !== "" && name.length > 0) {
-      characterFilter({ name: name });
+      nameFilter({ name: name });
       return;
     }
   };

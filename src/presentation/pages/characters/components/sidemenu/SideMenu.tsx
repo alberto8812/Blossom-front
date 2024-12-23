@@ -28,6 +28,9 @@ export const SideMenu = () => {
   const favoritesCharacter = useFavoritesCharacterStore(
     (state) => state.favorites
   );
+  const favoritesCountCharacter = useFavoritesCharacterStore(
+    (state) => state.countFavorites
+  );
   const nameFilter = useFilterSharestore((state) => state.name);
 
   const {
@@ -98,7 +101,9 @@ export const SideMenu = () => {
           ) : (
             <div className="space-y-7 pt-5 flex flex-col">
               {/* //!todo implmentar faboritos */}
-              <Accordion title={`STARRED CHARCTERS (${4})`}>
+              <Accordion
+                title={`STARRED CHARCTERS (${favoritesCountCharacter})`}
+              >
                 {favoritesCharacter?.map((item: CharacterEntity) => (
                   <NavLink
                     to={`/dashboard/characters/${item.id}`}
@@ -115,7 +120,11 @@ export const SideMenu = () => {
                 ))}
               </Accordion>
               <Accordion
-                title={`CHARCTERS (${4})`}
+                title={`CHARCTERS (${
+                  (characters?.length ?? 0) - favoritesCountCharacter < 0
+                    ? 0
+                    : (characters?.length ?? 0) - favoritesCountCharacter
+                })`}
                 style="max-h-96"
                 initalState={true}
               >
