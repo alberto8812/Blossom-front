@@ -19,6 +19,7 @@ import {
 } from "../../../../stores";
 import { Squeleton } from "../../../../components";
 import { ModalFilterSidebar } from "../../filters/ModalFilterSidebar";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export const SideMenu = () => {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ export const SideMenu = () => {
         onClick={toggleSidebar}
         className={`${
           isOpen ? "hidden" : "block"
-        } p-4 text-primary-Primary_700 text-lg lg:hidden shadow-none border-none hover:bg-gray-100 pt-12`}
+        } p-4 text-primary-Primary_700 text-lg lg:hidden shadow-none border-none hover:bg-gray-100 pt-5 absolute`}
       >
         <FaArrowLeftLong className="fas fa-bars" size={30} />
       </button>
@@ -85,7 +86,15 @@ export const SideMenu = () => {
           isOpen ? "block" : "hidden"
         } lg:block bg-gray-100 lg:w-96  w-screen  h-screen xs:fixed rounded-none border-none`}
       >
-        <div className="p-4 space-y-4 pt-16 relative">
+        <div className="p-4 space-y-4 pt-5 relative">
+          <div
+            onClick={toggleSidebar}
+            className={`${
+              isOpen ? "block" : "hidden"
+            } text-primary-Primary_700 flex justify-end`}
+          >
+            <IoIosCloseCircleOutline className="fas fa-bars" size={30} />
+          </div>
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold">Rick and Morty list</h1>
           </div>
@@ -100,7 +109,6 @@ export const SideMenu = () => {
             <Squeleton />
           ) : (
             <div className="space-y-7 pt-5 flex flex-col">
-              {/* //!todo implmentar faboritos */}
               <Accordion
                 title={`STARRED CHARCTERS (${favoritesCountCharacter})`}
               >
