@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "./SideMenu.css";
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -21,6 +21,7 @@ import { Squeleton } from "../../../../components";
 import { ModalFilterSidebar } from "../../filters/ModalFilterSidebar";
 
 export const SideMenu = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const characterFilter = useFilterSharestore((state) => state.characterFilter);
@@ -28,13 +29,21 @@ export const SideMenu = () => {
     (state) => state.favorites
   );
 
-  const { data: characters, isLoading } = useQuery({
+  const {
+    data: characters,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["characters", "sidebar", characterFilter],
     queryFn: () => getAllCharacters(characterFilter),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 
-  const { data: origins, isLoading: isLoadingOrigin } = useQuery({
+  const {
+    data: origins,
+    isLoading: isLoadingOrigin,
+    isError: isErroOrigin,
+  } = useQuery({
     queryKey: ["origin", "sidebar"],
     queryFn: () => getAllOrigin(),
     staleTime: 1000 * 60 * 5, //5 minutos
@@ -44,6 +53,10 @@ export const SideMenu = () => {
     queryFn: () => getAllGender(),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
+
+  if (isError) {
+    navigate("/404");
+  }
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { DashboardLayout } from "../layouts/DashBoardLayout";
 import { Root } from "./Root";
 import { CharacterPages } from "../pages";
+import { PageError } from "../components/erros/PageError";
 
 export const router = createBrowserRouter([
   {
@@ -15,14 +16,22 @@ export const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           {
-            path: "characters/:id", // Incluye el ID como parámetro de la ruta
-            element: <CharacterPages />, // Renderiza el componente CharacterPages
+            path: "characters/:id",
+            element: <CharacterPages />,
           },
           {
             path: "bears",
             element: <></>,
           },
         ],
+      },
+      {
+        path: "404",
+        element: <PageError />,
+      },
+      {
+        path: "*",
+        element: <DashboardLayout />,
       },
     ],
   },
