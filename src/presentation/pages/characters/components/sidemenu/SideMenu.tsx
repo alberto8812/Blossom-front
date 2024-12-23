@@ -28,14 +28,15 @@ export const SideMenu = () => {
   const favoritesCharacter = useFavoritesCharacterStore(
     (state) => state.favorites
   );
+  const nameFilter = useFilterSharestore((state) => state.name);
 
   const {
     data: characters,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["characters", "sidebar", characterFilter],
-    queryFn: () => getAllCharacters(characterFilter),
+    queryKey: ["characters", "sidebar", characterFilter, nameFilter],
+    queryFn: () => getAllCharacters({ ...characterFilter, ...nameFilter }),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 

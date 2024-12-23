@@ -6,9 +6,11 @@ interface FieldFileterShare {
     specieFilter: CharacterFilter
     originFilter: CharacterFilter
     characterFilter: CharacterFilter
+    name: CharacterFilter
     setOriginCharacterFilter: (characterFilters?: CharacterFilter) => void
     setSpeciesCharacterFilter: (characterFilters?: CharacterFilter) => void
     setValidatedFieldFilter: () => void
+    setNameCharacterFilter: (nameFilter?: CharacterFilter) => void
 
 }
 
@@ -18,9 +20,15 @@ export const useFilterSharestore = create<FieldFileterShare>()(
         specieFilter: {},
         originFilter: {},
         characterFilter: {},
+        name: {},
         setValidatedFieldFilter: () => {
             const newEspecieFilter = { ...get().specieFilter }
             const newOriginFilter = { ...get().originFilter }
+            const name = { ...get().name }
+
+            if (name.name === "") {
+                delete name.name
+            }
 
             if (newEspecieFilter.speciesId === "all") {
                 delete newEspecieFilter.speciesId
@@ -37,6 +45,9 @@ export const useFilterSharestore = create<FieldFileterShare>()(
         setSpeciesCharacterFilter: (characterFilters?: CharacterFilter) => {
             set({ specieFilter: characterFilters })
         },
+        setNameCharacterFilter: (nameFilter?: CharacterFilter) => {
+            set({ name: nameFilter })
+        }
 
     })
 
