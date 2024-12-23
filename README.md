@@ -9,5 +9,5 @@
 4. Run the project `npm run dev`
 5. Backend URL
 ```
-https://github.com/alberto8812/Blossom-front.git
+https://github.com/alberto8812/Blossom.git
 ```
