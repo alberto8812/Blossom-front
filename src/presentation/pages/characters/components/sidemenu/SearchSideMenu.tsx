@@ -1,5 +1,7 @@
 import { CiSearch } from "react-icons/ci";
 import { CiSliderVertical } from "react-icons/ci";
+import { useFilterSharestore } from "../../../../stores";
+import { useState } from "react";
 
 interface Props {
   handleFilterModal: (isOpenFilter: boolean) => void;
@@ -7,6 +9,26 @@ interface Props {
 }
 
 export const SearchSideMenu = ({ handleFilterModal, isOpenFilter }: Props) => {
+  const [Namefilter, setNameFilter] = useState("");
+  const nameFilter = useFilterSharestore(
+    (state) => state.setNameCharacterFilter
+  );
+
+  const handleInputSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+    setNameFilter(name);
+
+    if (name.trim() === "") {
+      nameFilter({});
+      return;
+    }
+
+    if (name.trim() !== "" && name.length > 0) {
+      nameFilter({ name: name });
+      return;
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto">
       <div className="relative">
@@ -18,6 +40,8 @@ export const SearchSideMenu = ({ handleFilterModal, isOpenFilter }: Props) => {
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none  "
           placeholder="Search or filter results "
+          value={Namefilter}
+          onChange={handleInputSearch}
         />
         <button
           type="submit"
