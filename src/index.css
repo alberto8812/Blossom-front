@@ -17,6 +17,10 @@ button {
   @apply transition-all  font-semibold uppercase tracking-wide shadow-md;
 }
 
+body {
+  @apply bg-white text-gray-800;
+}
+
 input:not(.swal2-input)[type="text"],
 input:not(.swal2-input)[type="password"],
 input:not(.swal2-input)[type="email"],
