@@ -2,17 +2,23 @@ import { useState } from "react";
 import { CharacterFilter, NameFilter } from "../../../domain";
 import { getAllGender, getAllOrigin } from "../../../action";
 import { useQuery } from "@tanstack/react-query";
+import { useStore } from "zustand";
+import { useFilterSharestore } from "../../stores";
 
-interface Props {
-  handleFilterSearch: (
-    filterData?: CharacterFilter,
-    DeleteField?: NameFilter[]
-  ) => void;
-}
+interface Props {}
 
-export const ModalFilterSidebar = ({ handleFilterSearch }: Props) => {
-  const [characterFilter, setCharacterFilter] = useState<CharacterFilter>({});
-  const [specieFilter, setSpecieFilter] = useState<CharacterFilter>({});
+export const ModalFilterSidebar = ({}: Props) => {
+  const specieFilter = useFilterSharestore((state) => state.specieFilter);
+  const characterFilter = useFilterSharestore((state) => state.originFilter);
+  const setValidatedFieldFilter = useFilterSharestore(
+    (state) => state.setValidatedFieldFilter
+  );
+  const setCharacterFilter = useFilterSharestore(
+    (state) => state.setOriginCharacterFilter
+  );
+  const setSpecieFilter = useFilterSharestore(
+    (state) => state.setSpeciesCharacterFilter
+  );
 
   const { data: origins, isLoading } = useQuery({
     queryKey: ["origin", "sidebar"],
@@ -26,44 +32,7 @@ export const ModalFilterSidebar = ({ handleFilterSearch }: Props) => {
   });
 
   const sendFilter = () => {
-    if (
-      characterFilter.originId === "all" &&
-      specieFilter.speciesId === "all"
-    ) {
-      handleFilterSearch(
-        {
-          ...characterFilter,
-          ...specieFilter,
-        },
-        ["speciesId", "originId"]
-      );
-      return;
-    }
-    if (characterFilter.originId === "all") {
-      handleFilterSearch(
-        {
-          ...characterFilter,
-          ...specieFilter,
-        },
-        ["originId"]
-      );
-      return;
-    }
-    if (specieFilter.speciesId === "all") {
-      handleFilterSearch(
-        {
-          ...characterFilter,
-          ...specieFilter,
-        },
-        ["speciesId"]
-      );
-      return;
-    }
-
-    handleFilterSearch({
-      ...characterFilter,
-      ...specieFilter,
-    });
+    setValidatedFieldFilter();
   };
 
   return (

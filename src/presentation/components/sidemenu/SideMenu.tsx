@@ -9,16 +9,17 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "../../../action";
 import { Accordion } from "../proto/acordion/Accordion";
 import { ModalFilterSidebar, Squeleton } from "..";
-import { CharacterEntity, CharacterFilter, NameFilter } from "../../../domain";
+import { CharacterEntity } from "../../../domain";
+import { useFilterSharestore } from "../../stores";
 
 export const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const [filterData, setFilterData] = useState<CharacterFilter>({});
+  const characterFilter = useFilterSharestore((state) => state.characterFilter);
 
   const { data: characters, isLoading } = useQuery({
-    queryKey: ["characters", "sidebar", filterData],
-    queryFn: () => getAllCharacters(filterData),
+    queryKey: ["characters", "sidebar", characterFilter],
+    queryFn: () => getAllCharacters(characterFilter),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 
@@ -30,20 +31,6 @@ export const SideMenu = () => {
     setIsOpenFilter(isOpenFilter);
   };
 
-  const handleFilterSearch = (
-    filter?: CharacterFilter,
-    DeleteField?: NameFilter[]
-  ) => {
-    if (DeleteField) {
-      const newFilterData = { ...filterData };
-      DeleteField.forEach((field) => {
-        delete newFilterData[field];
-      });
-      setFilterData(newFilterData);
-      return;
-    }
-    setFilterData((prev) => ({ ...prev, ...filter }));
-  };
   return (
     <div className="flex ">
       <button
@@ -67,9 +54,7 @@ export const SideMenu = () => {
             handleFilterModal={handleFilterModal}
             isOpenFilter={isOpenFilter}
           />
-          {isOpenFilter && (
-            <ModalFilterSidebar handleFilterSearch={handleFilterSearch} />
-          )}
+          {isOpenFilter && <ModalFilterSidebar />}
           {isLoading ? (
             <Squeleton />
           ) : (
