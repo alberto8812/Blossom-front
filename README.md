@@ -3,11 +3,11 @@
 # Blossom-front
 ## Dev
 
-1. Clonar el proyecto
-2. Instalar dependencias `npm install`
-3. Clonar el archivo `.env.template` a `.env` y configurar las variables de entorno
-4. Ejecuatar el proyecto ` npm run dev`
-
+1. Clone the project
+2. Install dependencies `npm install`
+3. Clone the `.env.template` file to `.env` and configure the environment variables
+4. Run the project `npm run dev`
+5. Backend URL
 ```
-
+https://github.com/alberto8812/Blossom-front.git
 ```
