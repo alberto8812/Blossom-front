@@ -5,9 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import { GiHearts } from "react-icons/gi";
 import { CharacterDetailSkeleton } from "./components/CharacterDetailSkeleton";
 import { getAllCharactersById } from "../../../action";
+import { useFavoritesCharacterStore } from "../../stores";
 
 export const CharacterPages = () => {
   const { id } = useParams();
+  const favoritesCharacter = useFavoritesCharacterStore(
+    (state) => state.favorites
+  );
+  const isFavorite = favoritesCharacter.some((charter) => charter.id === id);
 
   const { data: characters, isLoading } = useQuery({
     queryKey: ["characters", id],
@@ -31,7 +36,9 @@ export const CharacterPages = () => {
 
           <div className="absolute -right-1 -bottom-1">
             <GiHearts
-              className="w-6 h-6 text-gray-500 fill-current"
+              className={`${
+                isFavorite ? "text-secondary-Secondary_600" : "text-gray-500"
+              } w-6 h-6 fill-current`}
               size={20}
             />
           </div>

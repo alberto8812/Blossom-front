@@ -87,6 +87,7 @@ export const SideMenu = () => {
                       name={item.name}
                       species={item.specie}
                       img={item.img}
+                      favorite={true}
                     />
                   </NavLink>
                 ))}

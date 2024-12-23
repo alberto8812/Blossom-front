@@ -1,12 +1,15 @@
 import { FaRegHeart } from "react-icons/fa6";
+
 import { useFavoritesCharacterStore } from "../../stores";
 import { NameGender } from "../../../domain";
+import { FaHeart } from "react-icons/fa";
 
 interface Props {
   name?: string;
   species?: NameGender;
   img?: string;
   id?: string;
+  favorite?: boolean;
 }
 
 export const ProfileCard = ({
@@ -14,6 +17,7 @@ export const ProfileCard = ({
   species = NameGender.Alien,
   img,
   id = "",
+  favorite = false,
 }: Props) => {
   const addFavoriteAndremoVe = useFavoritesCharacterStore(
     (state) => state.addFavoriteAndremoVe
@@ -45,9 +49,15 @@ export const ProfileCard = ({
               id,
             })
           }
-          className="flex items-center justify-center h-8 w-8 rounded-full bg-white text-gray-300 hover:bg-primary-Primary_100 shadow-none border-none"
+          className={`flex items-center justify-center h-8 w-8 rounded-full bg-white ${
+            favorite ? "text-secondary-Secondary_600" : "text-gray-300"
+          } hover:bg-primary-Primary_100 shadow-none border-none`}
         >
-          <FaRegHeart className="fas fa-star" size={20} />
+          {favorite ? (
+            <FaHeart className="fas fa-star" size={20} />
+          ) : (
+            <FaRegHeart className="fas fa-star" size={20} />
+          )}
         </button>
       </div>
     </div>
